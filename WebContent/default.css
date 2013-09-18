@@ -1,0 +1,312 @@
+/*
+*{margin:0px;
+	padding:2px;  /*オペラの初期化*/
+}
+*/
+
+
+fieldset {
+	padding: 10 10 10 10;	
+	margin:10 10 10 10;
+	font-size:16px;
+    border-width:1px;
+    border-style:solid;
+    background:url("back_dark.gif");
+    
+}
+
+A:link {
+    color: black;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+A:visited {
+    color: black; 
+    font-weight:bold;
+    text-decoration:none;
+}
+
+A:active {
+    color: black; 
+    font-weight:bold;
+    text-decoration:none;
+}
+
+A:hover { 
+    color: black; 
+    font-weight:bold;
+    text-decoration:none;
+    background-color:gray;
+    background:url("back_dark.gif");
+}
+
+body{
+    font-size:14px;
+    background-color:silver;
+    background:url("back_dark.gif");
+    
+}
+
+.mainboard {
+    width:100%;
+    background-color:silver;
+    margin:2px;
+    padding:10px 10px 2px 10px;
+    background:url("back.gif");
+    
+    border-style: solid;
+    border-width: 1;
+    
+}
+
+
+input {
+    font-size:14px;
+    border-width:1px;
+    border-color:#7777aa;
+    background-color:#eeeeee; 
+}
+
+/*
+input[type="submit"] {
+    font-size:40px;
+    border-width:1px;
+    border-color:#7777aa;
+    background-color:#eeeeee; 
+}
+*/
+
+textarea {
+    font-size:14px;
+    border-width:1px;
+    border-color:#7777aa;
+    background-color:#eeeeee; 
+}
+
+
+/*
+ * エラーメッセージ
+ */
+li.feedbackPanelERROR {
+    margin:1px;
+    padding:0px;
+}
+
+
+.message {
+    background-color:FFCC33;
+    width: 100%;
+    margin:2px 0px 2px 0px;
+    color:black; 
+    border-color: black;
+    border-style: solid;
+    border-width: 1;
+    background:url("back_dark.gif");
+}
+
+.todo {
+    background-color:FFCC33;
+    margin:4px;
+    color:black; 
+    border-color: black;
+    border-style: solid;
+    border-width: 1;
+    background:url("back_dark.gif");
+}
+
+
+.noborder {
+    border-style: none;
+    background:url("back.gif");
+}
+
+.tempheader {
+    background: #99CCFF;
+}
+
+.excellheader {
+    background: silver;
+}
+
+.spacecell {
+	border-style: none;
+}
+
+
+table{
+    border: 1px #666666 solid; 
+    border-collapse: collapse;
+}
+
+table tr {
+    background-color:white;
+}
+
+table th {
+    background-color:#6699CC;
+    border-width:1px;
+    border-style:solid;
+    font-size:12px;
+    background:url("back_dark.gif");
+}
+
+
+table td {
+    border-style:solid;
+    border-width:1px;
+    font-size:12px;
+}
+
+.top.title{
+    background-color:gray;
+}
+
+
+
+.rights{
+    margin:2px 0px 2px;0px;
+	background-color:#000066;
+    font-size:14;
+    font-weight: bold;
+    text-align:center;
+    background:url("back_darkmore.gif");
+    
+    border-top-style: solid;
+    border-top-width: 1;
+    border-bottom-style: solid;
+    border-bottom-width: 1;
+    
+    
+}
+
+
+
+
+.toptitle{
+    font-size:30px;
+    font-weight:bold;
+    border-style:none none double none;
+    width:100%;
+}
+
+
+
+HR {
+  color: gray; /* IE */
+  background-color: gray; /* (NN用) */
+  border: 1px; /* 枠の太さ */
+
+}
+
+.odd{
+	background-color:ccffff;	
+}
+
+.even{
+	background-color:white;	
+}
+	
+
+.topmenu{
+	margin:2px 0px 2px 0px;
+	padding:2px;
+    background-color:#000066;
+	width:100%;
+	height: 28px;
+    background:url("back_darkmore.gif");
+	
+}
+
+.menulink{
+	margin:2px;
+	padding:2px;
+	float:left;
+	width:138px;
+	text-align:center;
+	background-color:silver;
+	font-size: 12;
+	
+	border-style:outset;
+	border-width:1;
+	
+    background:url("back_dark.gif");
+	
+
+}
+
+h1 {
+    font-size:24px;
+}
+h2 {
+    font-size:14px;
+    font-weight:bold;
+    border-style:solid;
+    border-width:0 0 1 4;
+    padding:2;
+}
+h3 {
+    font-size:13px;
+}
+h4 {
+    font-size:14px;
+}
+
+.example{
+	margin:20px;
+	padding:10px;
+	
+	border-left-style: solid;
+	border-left-width: 1;
+	border-left-color: black;
+	
+	border-top-style: solid;
+	border-top-width: 1;
+	border-top-color: black;
+	
+	border-bottom-style: double;
+	border-bottom-color: black;
+	
+	border-right-style: double;
+	border-right-color: black;
+	
+	background-color: white;
+	
+}
+
+pre{
+	
+	margin:20px;
+	padding:10px;
+	
+	border-left-style: solid;
+	border-left-width: 1;
+	border-left-color: black;
+	
+	border-top-style: solid;
+	border-top-width: 1;
+	border-top-color: black;
+	
+	border-bottom-style: double;
+	border-bottom-color: black;
+	
+	border-right-style: double;
+	border-right-color: black;
+	
+	background-color: white;
+
+}
+
+p {
+
+	padding:5px 5px 5px 10px;
+
+}
+
+
+.btn{
+	width:138px;
+    background:url("back_dark.gif");
+	border-style: outset;
+	border-width: 1px;
+}

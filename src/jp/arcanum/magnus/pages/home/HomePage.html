@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Seleniium to Excel Converter</title>
+		<link rel="stylesheet" href="./default.css" type="text/css">
+		<script src="./default.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+	
+		<wicket:extend>
+			
+			<center>
+				
+				<!--
+				<div style="border-style:solid;border-width:1;width:500;">
+				-->
+				<div>
+					<br>
+					Seleniumで実行するコードを、Excelに変換するサイトです。<br>
+					設定しだいによって、ある程度自由の利くExcelファイルを作ることができます。
+					詳しくは、メニューから「このサイトは何？」をご覧になってください。<br>
+					詳しい使用方法についてはメニューから「使い方」をご覧になってください。
+					<br>
+					<br>
+					<table>
+						<tr>
+							<th width="150">Seleniumコード（必須）</th>
+							<td><input type="file" size="50" wicket:id="seleniumcode" /></td>
+						</tr>
+					</table>
+					<br>
+					<table class="noborder">
+						<tr>
+							<td class="noborder">
+								<input type="checkbox"　onclick="onOff();" name="checkfile" wicket:id="checkfile"/>テンプレート、プロパティファイルを指定する
+							</td>
+						</tr>
+						<tr>
+							<td class="noborder">
+							
+								<table>
+									<tr>
+										<th width="150">テンプレートExcel</th>
+										<td><input type="file" name="exceltemplate" size="50" wicket:id="exceltemplate"/></td>
+									</tr>
+									<tr>
+										<th>プロパティファイル</th>
+										<td><input type="file" name="propertyfile" size="50" wicket:id="propertyfile"/></td>
+									</tr>
+								
+								</table>
+							
+							</td>
+						</tr>
+					</table>
+					<br>
+					<input type="submit" class="btn" value="変換" wicket:id="convert" />
+					&nbsp;&nbsp;
+					<span><input type="checkbox" value="true" wicket:id="csvcheck"/>CSVでダウンロードする。</span><br>
+					<br>
+					テンプレートExcel、プロパティファイルは指定しない場合は、デフォルトのファイルが適用されます。<br>
+					詳しくは、メニューから「使い方」を参照してください。<br>
+				</div>
+				<br>
+				<br>
+				
+				<table width="800">
+					<tr><th colspan="2">お知らせ</th></tr>
+					<tr>
+						<td>2009/3/15</td>
+						<td>Excel出力に対応しました。</td>
+					</tr>
+					<tr>
+						<td width="100">2009/3/4</td>
+						<td width="700">サイトを公開しました。</td>
+					</tr>
+				</table>
+				
+				
+				<table style="display:none;">
+					<tr><th>メッセージ</th></tr>
+					<tr>
+						<td>
+							<textarea rows="10" cols="70" wicket:id="message">
+								
+									ここに、メッセージ
+							
+							</textarea>
+						</td>
+					</tr>
+				</table>
+			</center>		
+
+	<script>
+		<!--
+		onOff();
+		-->
+	</script>
+
+		</wicket:extend>
+	</body>
+
+</html>
+
+		

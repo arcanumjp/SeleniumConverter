@@ -1,0 +1,356 @@
+<html>
+	<head>
+		<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Seleniium to Excel Converter</title>
+		<link rel="stylesheet" href="./default.css" type="text/css">
+		<script src="./default.js" type="text/javascript"></script>
+	
+	</head>
+
+	<body>
+
+		<wicket:extend>
+			
+	
+		<h2>画面の項目について</h2>
+
+		<ul>
+			<li>
+			<h3>Seleniumコード（必須）</h3>
+			変換したいSeleniumコードのファイルを入力します。
+			</li>
+			
+		</ul>
+
+		<ul>
+			<li>
+			<h3>テンプレート、プロパティファイルを指定する</h3>
+			独自のテンプレートExcel、プロパティファイルを指定する場合はチェックしてください。
+			</li>
+		</ul>
+
+		<ul>
+			<li>
+			<h3>テンプレートExcel</h3>
+			テンプレートとなるExcelファイルを指定します。入力しない場合は、システムで持つデフォルトのテンプレートファイルを適用します。
+			</li>
+		</ul>
+
+		<ul>
+			<li>
+			<h3>プロパティファイル</h3>
+			Excelファイルの埋め込み文字の設定、Selenium Codeからの文字列の変換を設定したファイルを指定します。入力しない場合、
+			システムで持つ、デフォルトのテンプレートファイルを適用します。
+			</li>
+		</ul>
+		
+		<ul>
+			<li>
+			<h3>CSVでダウンロードする。</h3>
+			結果をCSVで取得したい場合にチェックします。
+			</li>
+		</ul>
+
+  <br>
+
+		<h2>Excelテンプレートの作成方法</h2>
+
+　テストケースを繰り返したい行にプロパティファイルで定義したキー名を記述します。たとえばプロパティファイルにてExcelの列名を次のように定義した場合
+<pre>
+excel.settings.index=index
+excel.settings.col1=column1
+excel.settings.col2=column2
+excel.settings.col3=column3
+excel.settings.col4=column4
+
+</pre>
+
+　Excelファイルのほうでは次のように使用可能です。<br>
+
+<div class="example">
+<table>
+	<tr>
+		<th style="background-color:silver;">&nbsp</th>
+		<th style="background-color:silver;">A</th>
+		<th style="background-color:silver;">B</th>
+		<th style="background-color:silver;">C</th>
+		<th style="background-color:silver;">D</th>
+		<th style="background-color:silver;">E</th>
+		<th style="background-color:silver;">F</th>
+		<th style="background-color:silver;">G</th>
+		<th style="background-color:silver;">H</th>
+		<th style="background-color:silver;">I</th>
+	</tr>
+
+	<tr>
+		<th style="background-color:silver;">1</th>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+
+	<tr>
+		<th width="30"style="background-color:silver;">2</th>
+		<td width="10">&nbsp;</td>
+		<th width="30">No.</th>
+		<th width="80">カテゴリ</th>
+		<th width="80">実行予定日</th>
+		<th width="100">アクション</th>
+		<th width="100">ターゲット</th>
+		<th width="100">値</th>
+		<th width="300">備考</th>
+		<td width="20">&nbsp;</td>
+
+	</tr>
+	<tr>
+		<th style="background-color:silver;">3</th>
+		<td>&nbsp;</td>
+		<td>${index}</td>
+		<td>${column1}</td>
+		<td>&nbsp;</td>
+		<td>${column2}</td>
+		<td>${column3}</td>
+		<td>${column4}</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<th style="background-color:silver;">1</th>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<th style="background-color:silver;">1</th>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+
+</table>
+</div>
+
+説明：
+<ul>
+	<li>プロパティファイルで設定したexcel.settings.indexで指定した名称（この場合index）がExcel側で見つかった行に連番を振ります。</li>
+	<li>プロパティファイルで設定したexcel.settings.columnXXで指定した名称（この場合column1~column4）側で見つかった行に、日本語化したテストケースを埋め込みます。</li>
+	<li>セルに入力した${xxx}の内容は後述する書式によってプロパティファイルで設定します。</li>
+	<li>テンプレートExcelファイルのシートは１つにしてください。</li>
+	<li>${index},${xxx}を埋め込む行は、すべて同一の行にしてください。同一になっていない場合は、</li>
+	<li>一番下にある行をテストケースを繰り返し描画する最初の行となります。</li>
+</ul>
+<br>
+<br>
+		<h2>プロパティファイルの作成方法</h2>
+<ul>
+	<li>
+		ファイルはUTF-8で保存してください。
+		<div class="todo">
+			TODO:文字コードセット、改行は指定できるようにしたいなぁ。
+		</div>
+	</li>
+	<li>
+		<h3>excel.settings</h3>
+		エクセル上での表現（別名）を設定します。<br>
+		<b>excel.settings.index=[alias]</b><br>
+		エクセル上での連番を表現する列名を指定します。この列は、単なる連番を出力します。<br>
+		<br>
+		<b>excel.settings.col[n]=[alias]</b><br>
+		エクセル上で表現する列ｎの別名を指定します。
+	</li>
+			
+			<li>
+			<h3>書式</h3>
+			${xxx}でエクセルに埋め込んだ部分の書式を表現します。<br>
+			<b>selenium.[action].[alias]=値</b><br>
+			action...Selenium Codeの１列目に指定するclickやClickAndWaitなどのアクションです。<br>
+			<br>
+			alias...excel.settings.col[n]で指定した列の書式を表現します。<br>
+			<br>
+			例：<br>
+			excel.settings.col1=column1<br>
+			selenium.action.click=次のボタンを押下する。(レスポンスを待たない)  ${tartet}<br>
+			<br>
+			列column1には、アクションがclickの場合、"次のボタンを押下する。(レスポンスを待たない)  ${tartet}"となります。<br>
+			<br>
+			書式が設定されていない場合は、デフォルトの書式が適用されます。
+			
+			<div class="todo">
+			TODO:selenium.[action].[alias]=値だけではselectなどのオプションロケーターを持っているものには対応できない。対応できるようにしたいなぁ。
+			</div>
+			
+			</li>
+			
+		</ul>
+
+
+
+<br>
+
+
+		<h2>デフォルトで使用されるテンプレートファイル、プロパティファイルの内容</h2>
+
+　テンプレートExcelを指定しない場合は以下のようなデフォルトExcelファイルを使用します。
+
+<div class="example">
+<table>
+	<tr>
+		<th class="excellheader">&nbsp</th>
+		<th class="excellheader">A</th>
+		<th class="excellheader">B</th>
+		<th class="excellheader">C</th>
+		<th class="excellheader">D</th>
+		<th class="excellheader">E</th>
+		<th class="excellheader">F</th>
+		<th class="excellheader">G</th>
+		<th class="excellheader">H</th>
+		<th class="excellheader">I</th>
+	</tr>
+
+	<tr>
+		<th class="excellheader">1</th>
+		<th colspan="2" class="tempheader">Test Name</th>
+		<td colspan="3">Foo bar test</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+
+	<tr>
+		<th class="excellheader">1</th>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+
+	<tr>
+		<th width="30" class="excellheader">2</th>
+		<td class="spacecell">&nbsp;</td>
+		<th width="30" class="tempheader">No.</th>
+		<th width="80" class="tempheader">カテゴリ</th>
+		<th width="80" class="tempheader">実行予定日</th>
+		<th width="100" class="tempheader">アクション</th>
+		<th width="100" class="tempheader">ターゲット</th>
+		<th width="100" class="tempheader">値</th>
+		<th width="300" class="tempheader">備考</th>
+		<td class="spacecell">&nbsp;</td>
+
+	</tr>
+	<tr>
+		<th class="excellheader">3</th>
+		<td class="spacecell">&nbsp;</td>
+		<td>${index}</td>
+		<td>${column1}</td>
+		<td>&nbsp;</td>
+		<td>${column2}</td>
+		<td>${column3}</td>
+		<td>${column4}</td>
+		<td>&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+	<tr>
+		<th class="excellheader">4</th>
+		<td class="spacecell">&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+	<tr>
+		<th class="excellheader">5</th>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+	<tr>
+		<th class="excellheader">6</th>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+	<tr>
+		<th class="excellheader">7</th>
+		<th class="tempheader">&nbsp;</th>
+		<th class="tempheader">footer of</th>
+		<th class="tempheader">=c1</th>
+		<th class="tempheader">&nbsp;</th>
+		<th class="tempheader">&nbsp;</th>
+		<th class="tempheader">&nbsp;</th>
+		<th class="tempheader">&nbsp;</th>
+		<th class="tempheader">&nbsp;</th>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+	<tr>
+		<th class="excellheader">8</th>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+		<td class="spacecell">&nbsp;</td>
+	</tr>
+
+</table>
+</div>
+
+
+<div class="todo">
+	TODO:現状の書式では、完全一致な場合しか変換できない。clickとclickAndWaitなどのように、ワイルドカード指定などができれば楽できるよね。
+</div>
+
+<div class="example">
+	<textarea cols="140" rows="50" wicket:id="defaultprop">
+		ここにデフォルトプロパティの値
+	</textarea>
+</div>
+
+		</wicket:extend>
+	</body>
+
+</html>
+
+		
